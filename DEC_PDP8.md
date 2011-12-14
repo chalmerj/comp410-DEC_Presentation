@@ -114,7 +114,7 @@
 * Eventual sales across all models topped 300,000.
 * Had a vast number of peripheral devices (Storage, I/O, control, memory)
 * Eventually supplanted by microcomputers - and faded out by the introduction of the IBM PC.
-* 
+
 
 # References #
 

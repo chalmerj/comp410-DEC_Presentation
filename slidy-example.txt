@@ -1,0 +1,17 @@
+% Eating Habits
+% John Doe
+% March 22, 2005
+
+# In the morning
+
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+- Eat spaghetti
+- Drink wine
+
+--------------------------
+
+![picture of spaghetti](images/spaghetti.jpg)

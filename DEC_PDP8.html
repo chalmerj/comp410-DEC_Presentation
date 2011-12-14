@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Jeremy Chalmer" />
+  <meta name="date" content="2011-12-14" />
+  <meta name="duration" content="10" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="Slidy2/styles/slidy.css" />
+  </style>
+  <script src="Slidy2/scripts/slidy.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="slide cover title">
+  <h1 class="title">DEC PDP-8: History and Design</h1>
+  <p class="author">
+Jeremy Chalmer
+  </p>
+  <p class="date">2011-12-14</p> 
+</div>
+<div class="slide">
+<h1
+>DEC PDP-8</h1
+><div class="figure"
+><img src="images/PDP8-1_400.jpg" alt="DEC PDP-8"
+   /><p class="caption"
+  >DEC PDP-8</p
+  ></div
+></div>
+<div class="slide">
+<h1
+>DEC History</h1
+><ul
+><li
+  >Founded 1957 by Ken Olson, Harlan Anderson</li
+  ><li
+  >Located in Maynard, MA (until 1992)</li
+  ><li
+  >Created PDP, VAX families of Minicomputers</li
+  ><li
+  >Created Alpha Workstations</li
+  ><li
+  >Created VT100 Terminal</li
+  ><li
+  >At its peak, employed over 140,000</li
+  ><li
+  >Eventually acquired by Compaq (1998), then HP.</li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>PDP Family</h1
+><ul
+><li
+  >Programmable Data Processor</li
+  ><li
+  >Inexpensive Minicomputer ($120,000 instead of $1.2 Million)</li
+  ><li
+  >Began with PDP-1 - 18-bit word size, ~200 Kilohertz Clock Speed<ul
+    ><li
+      >First computerized video game: Spacewar!</li
+      ><li
+      >First Text Editor, Word Processor</li
+      ></ul
+    ></li
+  ><li
+  >PDP-4, PDP-5, PDP-7 (Original Unix Machine)</li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>PDP8</h1
+><ul
+><li
+  >Introduced March 22, 1965</li
+  ><li
+  >First commercially successful Minicomputer</li
+  ><li
+  >Over 50,000 systems sold - more then any other minicomputer to date.</li
+  ><li
+  >Original price $18,000 (1/5 cost of IBM/360)</li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>Hardware</h1
+><ul
+><li
+  >CPU with 4K of Memory (4,096 twelve-bit words)</li
+  ><li
+  >Teletype interface: ASR-33 Teletype</li
+  ><li
+  >Programmed I/O Bus (Negibus) - Printers / Teletypes</li
+  ><li
+  >DMA Bus - ADs, DAs, Tape, Disk Drives</li
+  ></ul
+><p
+><img src="images/ASR33.jpg" alt="ASR33"
+   /> <img src="images/FrontPanel.png" alt="Front Panel"
+   /></p
+></div>
+<div class="slide">
+<h1
+>PDP-8 Software</h1
+><ul
+><li
+  >Original Model had 8 Instructions, 2 Registers, Magnetic Core memory</li
+  ><li
+  >No 'Operating System' originally - just raw opcode entry via switches.</li
+  ><li
+  >Moved on to Paper Tape 'Operating Systems' - single function programs stored on Paper Tape (PAL or FORTRAN Compiler/Runtime)</li
+  ><li
+  >Eventually more complex operating systems evolved, such as OS/8.</li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>PDP-8 Instructions</h1
+><ul
+><li
+  >12-bit Instruction Words<ul
+    ><li
+      >0-2 - Instruction Code</li
+      ><li
+      >3 - Indirection Bit</li
+      ><li
+      >4 - Use Program Counter to complete Address</li
+      ><li
+      >5-11 - Offset (Used for 7-bit addresses or OPR Codes)</li
+      ></ul
+    ></li
+  ><li
+  >4096 word memory, divided into 128-word 'pages'.</li
+  ><li
+  >Routines had to fit within 128 words of memory</li
+  ><li
+  >Assembler Instructions:<ul
+    ><li
+      >000 – AND – AND the memory operand with AC.</li
+      ><li
+      >001 – TAD – Two's complement ADd the memory operand to <L,AC> (a 13 bit signed value).</li
+      ><li
+      >010 – ISZ – Increment the memory operand and Skip next instruction if result is Zero.</li
+      ><li
+      >011 – DCA – Deposit AC into the memory operand and Clear AC.</li
+      ><li
+      >100 – JMS – JuMp to Subroutine (storing return address in first word of subroutine!).</li
+      ><li
+      >101 – JMP – JuMP.</li
+      ><li
+      >110 – IOT – Input/Output Transfer.</li
+      ><li
+      >111 – OPR – microcoded OPeRations.</li
+      ></ul
+    ></li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>OPR Instruction</h1
+><ul
+><li
+  >Special instruction used for program control, not containing a memory address.</li
+  ><li
+  >'Microcoded' - One OPR Word could contain several instructions (basically a bitfield).</li
+  ><li
+  >Instructions for Setting, Clearing and modifying the Accumulator and registers</li
+  ><li
+  >Also used for arithmetic operations.</li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>Assembler Examples</h1
+><pre
+><code
+  >*10                   / Set current assembly origin to address 10,
+STPTR,    STRNG-1     / An auto-increment register (one of eight at 10-17)
+
+*200                  / Set current assembly origin to program text area
+HELLO,  CLA CLL       / Clear AC and Link again (needed when we loop back from tls)
+        TAD I Z STPTR / Get next character, indirect via PRE-auto-increment address from the zero page
+        SNA           / Skip if non-zero (not end of string)
+        HLT           / Else halt on zero (end of string)
+        TLS           / Output the character in the AC to the teleprinter
+        TSF           / Skip if teleprinter ready for character
+        JMP .-1       / Else jump back and try again
+        JMP HELLO     / Jump back for the next character
+
+STRNG,  310           / H
+        345           / e
+        354           / l
+        354           / l
+        357           / o
+        254           /,
+        240           / (space)
+        367           / w
+        357           / o
+        362           / r
+        354           / l
+        344           / d
+        241           / !
+        0             / End of string
+$HELLO                /DEFAULT TERMINATOR
+</code
+  ></pre
+></div>
+<div class="slide">
+<h1
+>Historical Relevance</h1
+><ul
+><li
+  >Large family of PDP-8 Models were produced, using different internal designs.</li
+  ><li
+  >Eventual sales across all models topped 300,000.</li
+  ><li
+  >Had a vast number of peripheral devices (Storage, I/O, control, memory)</li
+  ><li
+  >Eventually supplanted by microcomputers - and faded out by the introduction of the IBM PC.</li
+  ></ul
+></div>
+<div class="slide">
+<h1
+>References</h1
+><ul
+><li
+  ><a href="http://www.faqs.org/faqs/dec-faq/pdp8/"
+    >http://www.faqs.org/faqs/dec-faq/pdp8/</a
+    ></li
+  ><li
+  ><a href="http://www.divms.uiowa.edu/~jones/pdp8/"
+    >http://www.divms.uiowa.edu/~jones/pdp8/</a
+    ></li
+  ><li
+  ><a href="http://www.grc.com/pdp-8/pdp-8.htm"
+    >http://www.grc.com/pdp-8/pdp-8.htm</a
+    ></li
+  ><li
+  ><a href="http://www.pdp8online.com/"
+    >http://www.pdp8online.com/</a
+    ></li
+  ></ul
+></div>
+</body>
+</html>
