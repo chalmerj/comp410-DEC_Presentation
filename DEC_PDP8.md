@@ -30,10 +30,10 @@
 
 * Introduced March 22, 1965
 * First commercially successful Minicomputer
-* Over 50,000 systems sold - more then any other minicomputer to date
+* Over 50,000 systems sold - more then any other minicomputer to date.
 * Original price $18,000 (1/5 cost of IBM/360)
 
-## Hardware ##
+# Hardware #
 
 * CPU with 4K of Memory (4,096 twelve-bit words)
 * Teletype interface: ASR-33 Teletype
@@ -66,10 +66,59 @@
     * 011 – DCA – Deposit AC into the memory operand and Clear AC.
     * 100 – JMS – JuMp to Subroutine (storing return address in first word of subroutine!).
     * 101 – JMP – JuMP.
-    * 110 – IOT – Input/Output Transfer (see below).
-    * 111 – OPR – microcoded OPeRations (see below).
+    * 110 – IOT – Input/Output Transfer.
+    * 111 – OPR – microcoded OPeRations.
+
+# OPR Instruction #
+
+* Special instruction used for program control, not containing a memory address.
+* 'Microcoded' - One OPR Word could contain several instructions (basically a bitfield).
+* Instructions for Setting, Clearing and modifying the Accumulator and registers
+* Also used for arithmetic operations. 
+
+# Assembler Examples #
+
+    *10                   / Set current assembly origin to address 10,
+    STPTR,    STRNG-1     / An auto-increment register (one of eight at 10-17)
+    
+    *200                  / Set current assembly origin to program text area
+    HELLO,  CLA CLL       / Clear AC and Link again (needed when we loop back from tls)
+            TAD I Z STPTR / Get next character, indirect via PRE-auto-increment address from the zero page
+            SNA           / Skip if non-zero (not end of string)
+            HLT           / Else halt on zero (end of string)
+            TLS           / Output the character in the AC to the teleprinter
+            TSF           / Skip if teleprinter ready for character
+            JMP .-1       / Else jump back and try again
+            JMP HELLO     / Jump back for the next character
+    
+    STRNG,  310           / H
+            345           / e
+            354           / l
+            354           / l
+            357           / o
+            254           /,
+            240           / (space)
+            367           / w
+            357           / o
+            362           / r
+            354           / l
+            344           / d
+            241           / !
+            0             / End of string
+    $HELLO                /DEFAULT TERMINATOR
+
+
+# Historical Relevance #
+
+* Large family of PDP-8 Models were produced, using different internal designs.
+* Eventual sales across all models topped 300,000.
+* Had a vast number of peripheral devices (Storage, I/O, control, memory)
+* Eventually supplanted by microcomputers - and faded out by the introduction of the IBM PC.
+* 
 
 # References #
 
 * [http://www.faqs.org/faqs/dec-faq/pdp8/](http://www.faqs.org/faqs/dec-faq/pdp8/)
-* [http://www.divms.uiowa.edu/~jones/pdp8/](http://www.divms.uiowa.edu/~jones/pdp8/)
+* [http://www.divms.uiowa.edu/\~jones/pdp8/](http://www.divms.uiowa.edu/~jones/pdp8/)
+* [http://www.grc.com/pdp-8/pdp-8.htm](http://www.grc.com/pdp-8/pdp-8.htm)
+* [http://www.pdp8online.com/](http://www.pdp8online.com/)
