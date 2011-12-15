@@ -1,7 +1,7 @@
 % Example Slide Show
 % Jeremy Chalmer
 % 2011-12-13
-% jchalmer@luc.edu
+
 
 
 # Slide 1  
